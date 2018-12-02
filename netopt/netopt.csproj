@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>netcoreapp2.0;netcoreapp2.1</TargetFrameworks>
+        <Title>NetOpt - Command line parser</Title>
+        <PackageId>NetOpt</PackageId>
+        <Authors>Tarcis Shiosawa</Authors>
+        <Version>1.0.0</Version>
+        <Description>A simple command line parser for .Net Core</Description>
+    </PropertyGroup>
+
+</Project>
