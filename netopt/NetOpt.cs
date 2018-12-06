@@ -31,8 +31,11 @@ namespace netopt
 
                     if (singleParam == "")
                         throw new Exception($"Error: flag '{def.Name}' needs a parameter, but was not provided");
-                    
-                    Flags.Add(new NetOptFlag(def.Name, singleParam.Split(' ').ToList()));
+
+                    if (def.Help == null)
+                        Flags.Add(new NetOptFlag(def.Name, singleParam.Split(' ').ToList()));
+                    else
+                        Flags.Add(new NetOptFlag(def.Name, singleParam.Split(' ').ToList(), def.Help));
                 }
                 else
                 {
@@ -40,12 +43,22 @@ namespace netopt
                     {
                         var singleOrGrouped = SeekForSingleOrGrouped(lineToParse, def.Name);
                         if (singleOrGrouped != "")
-                            Flags.Add(new NetOptFlag(def.Name));
+                        {
+                            if (def.Help == null)
+                                Flags.Add(new NetOptFlag(def.Name));
+                            else
+                                Flags.Add(new NetOptFlag(def.Name, def.Help));
+                        }   
                     }
                     else
                     {
                         if (SeekForLongOption(lineToParse, def.ToString()))
-                            Flags.Add(new NetOptFlag(def.Name));
+                        {
+                            if (def.Help == null)
+                                Flags.Add(new NetOptFlag(def.Name));
+                            else
+                                Flags.Add(new NetOptFlag(def.Name, def.Help));
+                        }
                     }
                 }
             }
@@ -104,6 +117,23 @@ namespace netopt
         public bool HasFlag(string flagName)
         {
             return Flags.Any(f => f.Name.Equals(flagName));
+        }
+
+        public void ShowHelp()
+        {
+            int maxOptLenght = Flags.Max(f => f.Name).Length;
+            string hint = string.Empty;
+
+            foreach (var flag in Flags)
+            {
+                if (flag.Help != null)
+                {
+                    hint = flag.Help.Hint ?? $"{(flag.Name.Length > 1 ? "--" : " -")}{flag.Name.PadRight(maxOptLenght)}\t ";
+                    hint += flag.Help.Detail ?? "";
+                }
+
+                Console.WriteLine(hint);
+            }
         }
     }
 }
