@@ -52,7 +52,7 @@ The strings "filea.c", "fileb.c" and "filec.c" will be available at the property
 
 ### Sample program
 
-```
+```csharp
 using System;
 using netopt;
 
