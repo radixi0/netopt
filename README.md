@@ -21,7 +21,7 @@ Also accepted in a grouped form: `-abc` - and in any order: `-c -a -b ` .. `-cab
 
 
 #### Serch for a single flag
-```
+```csharp
 var p = new ArgumentBuilder();
 p.Add(new Argument("v")); // Look for -v flag on args array. By default, flags has OptionType = ShortOption
 
@@ -29,7 +29,7 @@ p.Add(new Argument("v")); // Look for -v flag on args array. By default, flags h
 
 #### Search for a single flag, long option
 
-```
+```csharp
 var p = new ArgumentBuilder();
 p.Add(new Argument("version", OptionType.LongOption)); // Look for --version flag on args array.
 
