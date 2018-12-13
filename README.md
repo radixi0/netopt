@@ -39,7 +39,7 @@ p.Add(new Argument("version", OptionType.LongOption)); // Look for --version fla
 
 **RequireParams** must be set true:
 
-```
+```csharp
 var p = new ArgumentBuilder();
 p.Add(new Argument("file", true, OptionType.LongOption)); // Look for flag and params
 
